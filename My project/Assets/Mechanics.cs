@@ -8,6 +8,9 @@ public class Mechanics : MonoBehaviour
 {
     Rigidbody2D rg;
     public GameObject gameOverObject;
+    public GameObject timerObject;
+    public GameObject scoreObject;
+    public GameObject startObject;
 
     public float speed;
     public static Boolean ready;
@@ -17,6 +20,10 @@ public class Mechanics : MonoBehaviour
         Time.timeScale = 1.0f;
         ready = false;
         rg = GetComponent<Rigidbody2D>();
+        rg.gravityScale = -0.001f;
+        gameOverObject.SetActive(false);
+        timerObject.SetActive(false);
+        scoreObject.SetActive(false);
     }
 
     void GameOver()
@@ -36,13 +43,16 @@ public class Mechanics : MonoBehaviour
     {
         if (!ready) 
         {
-            rg.gravityScale = 0;
+            rg.gravityScale = -0.001f;
         }
         if (Input.GetMouseButtonDown(0) || Input.GetKeyDown(KeyCode.Space))
         {
             rg.gravityScale = 1;
             rg.AddForce(Vector2.up * speed);
             ready = true;
+            timerObject.SetActive(true);
+            scoreObject.SetActive(true);
+            startObject.SetActive(false);
         }
 
     }
