@@ -18,7 +18,7 @@ public class Timer : MonoBehaviour
         while (true)
         {
             yield return new WaitUntil(() => Mechanics.ready == true);
-            if (Mechanics.ready)
+            if (Mechanics.ready && !Mechanics.isDead)
             {
                 timer++;
                 yield return new WaitForSeconds(1);
