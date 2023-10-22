@@ -1,6 +1,4 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -13,12 +11,13 @@ public class Mechanics : MonoBehaviour
     public GameObject startObject;
 
     public float speed;
-    public static Boolean ready;
+    public static Boolean ready, isDead;
 
     void Start()
     {
         Time.timeScale = 1.0f;
         ready = false;
+        isDead = false;
         rg = GetComponent<Rigidbody2D>();
         rg.gravityScale = -0.001f;
         gameOverObject.SetActive(false);
@@ -30,6 +29,8 @@ public class Mechanics : MonoBehaviour
     {
         Time.timeScale = 0;
         gameOverObject.SetActive(true);
+        isDead = true;
+        FindObjectOfType<AudioManager>().Play("dead");
     }
     public void RestartGame()
     {
@@ -53,7 +54,8 @@ public class Mechanics : MonoBehaviour
             timerObject.SetActive(true);
             scoreObject.SetActive(true);
             startObject.SetActive(false);
-        }
 
+            if (!isDead) FindObjectOfType<AudioManager>().Play("wing sound");
+        }
     }
 }
