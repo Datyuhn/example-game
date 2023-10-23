@@ -8,6 +8,7 @@ public class Mechanics : MonoBehaviour
     public float speed;
     public float rotationSpeed;
     public float limitOffset;
+    public Animator animator;
 
     [HideInInspector]
     public static bool ready, isDead;
@@ -63,5 +64,7 @@ public class Mechanics : MonoBehaviour
     {
         FindObjectOfType<GameManager>().GameOver();
         isDead = true;
+        animator.SetTrigger("dead");
+
     }
 }
